@@ -17,6 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OneFragment : Fragment(R.layout.fragment_one) {
 
@@ -37,8 +41,12 @@ class OneFragment : Fragment(R.layout.fragment_one) {
         _binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
             if (action == EditorInfo.IME_ACTION_SEARCH) {
                 editText.text.toString().let {
-                    _viewModel.searchResults(it, requireContext()).apply {
-                        _adapter.submitList(this)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        _viewModel.searchResults(it, requireContext()).apply {
+                            withContext(Dispatchers.Main) {
+                                _adapter.submitList(this@apply)
+                            }
+                        }
                     }
                 }
                 return@setOnEditorActionListener true
