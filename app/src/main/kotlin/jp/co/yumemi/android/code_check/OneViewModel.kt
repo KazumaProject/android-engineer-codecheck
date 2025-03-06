@@ -14,11 +14,9 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.async
 import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
-import java.util.Date
 
 /**
  * TwoFragment で使う
@@ -35,18 +33,18 @@ class OneViewModel : ViewModel() {
             }
 
             val jsonBody = JSONObject(response.receive<String>())
-
-            val jsonItems = jsonBody.optJSONArray("items")!!
-
+            val jsonItems = requireNotNull(jsonBody.optJSONArray("items")) {
+                "'items' is missing or not an array in the response JSON."
+            }
             val items = mutableListOf<Item>()
-
             /**
              * アイテムの個数分ループする
              */
             for (i in 0 until jsonItems.length()) {
-                val jsonItem = jsonItems.optJSONObject(i)!!
+                val jsonItem = jsonItems.optJSONObject(i)
                 val name = jsonItem.optString("full_name")
-                val ownerIconUrl = jsonItem.optJSONObject("owner")!!.optString("avatar_url")
+                val ownerIconUrl =
+                    jsonItem.optJSONObject("owner")?.optString("avatar_url")
                 val language = jsonItem.optString("language")
                 val stargazersCount = jsonItem.optLong("stargazers_count")
                 val watchersCount = jsonItem.optLong("watchers_count")
@@ -65,9 +63,6 @@ class OneViewModel : ViewModel() {
                     )
                 )
             }
-
-            lastSearchDate = Date()
-
             return@async items.toList()
 
         }.await()
@@ -76,7 +71,7 @@ class OneViewModel : ViewModel() {
 @Parcelize
 data class Item(
     val name: String,
-    val ownerIconUrl: String,
+    val ownerIconUrl: String?,
     val language: String,
     val stargazersCount: Long,
     val watchersCount: Long,

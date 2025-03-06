@@ -9,8 +9,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
-import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
+import java.util.Date
 
 class TwoFragment : Fragment(R.layout.fragment_two) {
 
@@ -22,13 +22,14 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("検索した日時", lastSearchDate.toString())
+        Log.d("検索した日時", Date().toString())
 
         binding = FragmentTwoBinding.bind(view)
 
         val item = args.item
-
-        _binding.ownerIconView.load(item.ownerIconUrl)
+        if (item.ownerIconUrl == null) _binding.ownerIconView.load(R.drawable.jetbrains) else _binding.ownerIconView.load(
+            item.ownerIconUrl
+        )
         _binding.nameView.text = item.name
         _binding.languageView.text = item.language
         _binding.starsView.text = getString(R.string.stars_count, item.stargazersCount)
