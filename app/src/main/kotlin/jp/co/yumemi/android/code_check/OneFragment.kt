@@ -30,6 +30,8 @@ class OneFragment : Fragment(R.layout.fragment_one) {
 
     private val viewModel: OneViewModel by viewModels()
 
+    private var adapter: CustomAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,10 +44,11 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val _layoutManager = LinearLayoutManager(requireContext())
-        val _dividerItemDecoration =
-            DividerItemDecoration(requireContext(), _layoutManager.orientation)
-        val _adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
+        val linearLayoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
+
+        val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: Item) {
                 gotoRepositoryFragment(item)
             }
@@ -58,7 +61,7 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                         CoroutineScope(Dispatchers.IO).launch {
                             viewModel.searchResults(it, requireContext()).let { items ->
                                 withContext(Dispatchers.Main) {
-                                    _adapter.submitList(items)
+                                    adapter.submitList(items)
                                 }
                             }
                         }
@@ -68,16 +71,17 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                 return@setOnEditorActionListener false
             }
 
-            recyclerView.also {
-                it.layoutManager = _layoutManager
-                it.addItemDecoration(_dividerItemDecoration)
-                it.adapter = _adapter
+            recyclerView.apply {
+                layoutManager = linearLayoutManager
+                addItemDecoration(dividerItemDecoration)
+                setAdapter(adapter)
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        adapter = null
         _binding = null
     }
 
