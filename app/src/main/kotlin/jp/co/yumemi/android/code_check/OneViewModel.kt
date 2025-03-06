@@ -33,35 +33,35 @@ class OneViewModel : ViewModel() {
             }
 
             val jsonBody = JSONObject(response.receive<String>())
-            val jsonItems = jsonBody.optJSONArray("items")
+            val jsonItems = requireNotNull(jsonBody.optJSONArray("items")) {
+                "'items' is missing or not an array in the response JSON."
+            }
             val items = mutableListOf<Item>()
             /**
              * アイテムの個数分ループする
              */
-            jsonItems?.let { jsonArray ->
-                for (i in 0 until jsonArray.length()) {
-                    val jsonItem = jsonArray.optJSONObject(i)
-                    val name = jsonItem.optString("full_name")
-                    val ownerIconUrl =
-                        jsonItem.optJSONObject("owner")?.optString("avatar_url")
-                    val language = jsonItem.optString("language")
-                    val stargazersCount = jsonItem.optLong("stargazers_count")
-                    val watchersCount = jsonItem.optLong("watchers_count")
-                    val forksCount = jsonItem.optLong("forks_conut")
-                    val openIssuesCount = jsonItem.optLong("open_issues_count")
+            for (i in 0 until jsonItems.length()) {
+                val jsonItem = jsonItems.optJSONObject(i)
+                val name = jsonItem.optString("full_name")
+                val ownerIconUrl =
+                    jsonItem.optJSONObject("owner")?.optString("avatar_url")
+                val language = jsonItem.optString("language")
+                val stargazersCount = jsonItem.optLong("stargazers_count")
+                val watchersCount = jsonItem.optLong("watchers_count")
+                val forksCount = jsonItem.optLong("forks_conut")
+                val openIssuesCount = jsonItem.optLong("open_issues_count")
 
-                    items.add(
-                        Item(
-                            name = name,
-                            ownerIconUrl = ownerIconUrl,
-                            language = context.getString(R.string.written_language, language),
-                            stargazersCount = stargazersCount,
-                            watchersCount = watchersCount,
-                            forksCount = forksCount,
-                            openIssuesCount = openIssuesCount
-                        )
+                items.add(
+                    Item(
+                        name = name,
+                        ownerIconUrl = ownerIconUrl,
+                        language = context.getString(R.string.written_language, language),
+                        stargazersCount = stargazersCount,
+                        watchersCount = watchersCount,
+                        forksCount = forksCount,
+                        openIssuesCount = openIssuesCount
                     )
-                }
+                )
             }
             return@async items.toList()
 
