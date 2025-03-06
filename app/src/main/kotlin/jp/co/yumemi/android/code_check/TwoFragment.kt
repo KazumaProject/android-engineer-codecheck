@@ -5,7 +5,9 @@ package jp.co.yumemi.android.code_check
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
@@ -16,25 +18,39 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
 
     private val args: TwoFragmentArgs by navArgs()
 
-    private var binding: FragmentTwoBinding? = null
-    private val _binding get() = binding!!
+    private var _binding: FragmentTwoBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTwoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("検索した日時", Date().toString())
 
-        binding = FragmentTwoBinding.bind(view)
-
         val item = args.item
-        if (item.ownerIconUrl == null) _binding.ownerIconView.load(R.drawable.jetbrains) else _binding.ownerIconView.load(
-            item.ownerIconUrl
-        )
-        _binding.nameView.text = item.name
-        _binding.languageView.text = item.language
-        _binding.starsView.text = getString(R.string.stars_count, item.stargazersCount)
-        _binding.watchersView.text = getString(R.string.watchers_count, item.watchersCount)
-        _binding.forksView.text = getString(R.string.forks_count, item.forksCount)
-        _binding.openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
+        binding.apply {
+            if (item.ownerIconUrl == null) ownerIconView.load(R.drawable.jetbrains) else ownerIconView.load(
+                item.ownerIconUrl
+            )
+            nameView.text = item.name
+            languageView.text = item.language
+            starsView.text = getString(R.string.stars_count, item.stargazersCount)
+            watchersView.text = getString(R.string.watchers_count, item.watchersCount)
+            forksView.text = getString(R.string.forks_count, item.forksCount)
+            openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
