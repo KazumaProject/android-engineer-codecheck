@@ -14,11 +14,9 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.async
 import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
-import java.util.Date
 
 /**
  * TwoFragment で使う
@@ -65,10 +63,6 @@ class OneViewModel : ViewModel() {
                     )
                 }
             }
-
-
-            lastSearchDate = Date()
-
             return@async items.toList()
 
         }.await()
