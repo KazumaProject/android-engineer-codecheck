@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,6 +28,8 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     private var _binding: FragmentOneBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: OneViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +42,6 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val _viewModel = OneViewModel()
         val _layoutManager = LinearLayoutManager(requireContext())
         val _dividerItemDecoration =
             DividerItemDecoration(requireContext(), _layoutManager.orientation)
@@ -54,7 +56,7 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
                         CoroutineScope(Dispatchers.IO).launch {
-                            _viewModel.searchResults(it, requireContext()).let { items ->
+                            viewModel.searchResults(it, requireContext()).let { items ->
                                 withContext(Dispatchers.Main) {
                                     _adapter.submitList(items)
                                 }
