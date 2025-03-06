@@ -27,8 +27,9 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
         binding = FragmentTwoBinding.bind(view)
 
         val item = args.item
-
-        _binding.ownerIconView.load(item.ownerIconUrl)
+        if (item.ownerIconUrl == null) _binding.ownerIconView.load(R.drawable.jetbrains) else _binding.ownerIconView.load(
+            item.ownerIconUrl
+        )
         _binding.nameView.text = item.name
         _binding.languageView.text = item.language
         _binding.starsView.text = getString(R.string.stars_count, item.stargazersCount)
