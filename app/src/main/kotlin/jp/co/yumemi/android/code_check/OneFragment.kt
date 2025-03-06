@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +29,8 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     private val binding get() = _binding!!
 
     private val viewModel: OneViewModel by viewModels()
+
+    private var adapter: CustomAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,10 +44,11 @@ class OneFragment : Fragment(R.layout.fragment_one) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val _layoutManager = LinearLayoutManager(requireContext())
-        val _dividerItemDecoration =
-            DividerItemDecoration(requireContext(), _layoutManager.orientation)
-        val _adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
+        val linearLayoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
+
+        val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
             override fun itemClick(item: Item) {
                 gotoRepositoryFragment(item)
             }
@@ -55,10 +58,10 @@ class OneFragment : Fragment(R.layout.fragment_one) {
             searchInputText.setOnEditorActionListener { editText, action, _ ->
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
-                        CoroutineScope(Dispatchers.IO).launch {
+                        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
                             viewModel.searchResults(it, requireContext()).let { items ->
                                 withContext(Dispatchers.Main) {
-                                    _adapter.submitList(items)
+                                    adapter.submitList(items)
                                 }
                             }
                         }
@@ -68,16 +71,18 @@ class OneFragment : Fragment(R.layout.fragment_one) {
                 return@setOnEditorActionListener false
             }
 
-            recyclerView.also {
-                it.layoutManager = _layoutManager
-                it.addItemDecoration(_dividerItemDecoration)
-                it.adapter = _adapter
+            recyclerView.apply {
+                layoutManager = linearLayoutManager
+                addItemDecoration(dividerItemDecoration)
+                setAdapter(adapter)
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.recyclerView.adapter = null
+        adapter = null
         _binding = null
     }
 
