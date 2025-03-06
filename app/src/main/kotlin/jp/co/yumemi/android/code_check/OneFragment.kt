@@ -24,10 +24,21 @@ import kotlinx.coroutines.withContext
 
 class OneFragment : Fragment(R.layout.fragment_one) {
 
+    private var _binding: FragmentOneBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentOneBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val _binding = FragmentOneBinding.bind(view)
         val _viewModel = OneViewModel()
         val _layoutManager = LinearLayoutManager(requireContext())
         val _dividerItemDecoration =
@@ -38,27 +49,34 @@ class OneFragment : Fragment(R.layout.fragment_one) {
             }
         })
 
-        _binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
-            if (action == EditorInfo.IME_ACTION_SEARCH) {
-                editText.text.toString().let {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        _viewModel.searchResults(it, requireContext()).apply {
-                            withContext(Dispatchers.Main) {
-                                _adapter.submitList(this@apply)
+        binding.apply {
+            searchInputText.setOnEditorActionListener { editText, action, _ ->
+                if (action == EditorInfo.IME_ACTION_SEARCH) {
+                    editText.text.toString().let {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            _viewModel.searchResults(it, requireContext()).let { items ->
+                                withContext(Dispatchers.Main) {
+                                    _adapter.submitList(items)
+                                }
                             }
                         }
                     }
+                    return@setOnEditorActionListener true
                 }
-                return@setOnEditorActionListener true
+                return@setOnEditorActionListener false
             }
-            return@setOnEditorActionListener false
-        }
 
-        _binding.recyclerView.also {
-            it.layoutManager = _layoutManager
-            it.addItemDecoration(_dividerItemDecoration)
-            it.adapter = _adapter
+            recyclerView.also {
+                it.layoutManager = _layoutManager
+                it.addItemDecoration(_dividerItemDecoration)
+                it.adapter = _adapter
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun gotoRepositoryFragment(item: Item) {
