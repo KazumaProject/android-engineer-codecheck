@@ -26,6 +26,9 @@ class OneViewModel : ViewModel() {
     // 検索結果
     suspend fun searchResults(inputText: String, context: Context): List<Item> =
         viewModelScope.async {
+            if (inputText.isEmpty()) {
+                return@async emptyList()
+            }
             val client = HttpClient(Android)
             val response: HttpResponse = client.get("https://api.github.com/search/repositories") {
                 header("Accept", "application/vnd.github.v3+json")
