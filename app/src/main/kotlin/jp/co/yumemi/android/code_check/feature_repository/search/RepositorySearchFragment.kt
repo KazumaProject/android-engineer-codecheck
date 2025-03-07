@@ -14,10 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import jp.co.yumemi.android.code_check.OneFragmentDirections
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import jp.co.yumemi.android.code_check.feature_repository.search.data.remote.models.RepoInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -84,9 +84,11 @@ class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
         _binding = null
     }
 
-    private fun gotoRepositoryFragment(item: Item) {
+    private fun gotoRepositoryFragment(repoInfo: RepoInfo) {
         val action =
-            OneFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(item = item)
+            RepositorySearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
+                repoInfo = repoInfo
+            )
         findNavController().navigate(action)
     }
 }

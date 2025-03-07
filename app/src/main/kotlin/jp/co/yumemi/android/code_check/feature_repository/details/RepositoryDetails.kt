@@ -36,9 +36,9 @@ class RepositoryDetails : Fragment(R.layout.fragment_two) {
 
         Log.d("検索した日時", Date().toString())
 
-        val item = args.item
+        val item = args.repoInfo
         binding.apply {
-            if (item.ownerIconUrl == null) ownerIconView.load(R.drawable.jetbrains) else ownerIconView.load(
+            ownerIconView.load(
                 item.ownerIconUrl
             )
             nameView.text = item.name
