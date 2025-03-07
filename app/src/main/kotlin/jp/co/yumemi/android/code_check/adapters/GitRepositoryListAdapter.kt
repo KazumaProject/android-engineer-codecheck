@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import jp.co.yumemi.android.code_check.Item
+import jp.co.yumemi.android.code_check.feature_repository.search.Item
 import jp.co.yumemi.android.code_check.R
 
 class GitRepositoryListAdapter :

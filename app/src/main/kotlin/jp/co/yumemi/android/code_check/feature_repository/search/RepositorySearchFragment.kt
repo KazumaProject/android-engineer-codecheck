@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.code_check.feature_repository.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,18 +14,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import jp.co.yumemi.android.code_check.OneFragmentDirections
+import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class OneFragment : Fragment(R.layout.fragment_one) {
+class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
 
     private var _binding: FragmentOneBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: OneViewModel by viewModels()
+    private val viewModel: RepositorySearchViewModel by viewModels()
 
     private var gitRepositoryListAdapter: GitRepositoryListAdapter? = null
 
