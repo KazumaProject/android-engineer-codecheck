@@ -28,8 +28,7 @@ class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
     private val binding get() = _binding!!
 
     private val viewModel: RepositorySearchViewModel by viewModels()
-
-    private var gitRepositoryListAdapter: GitRepositoryListAdapter? = null
+    private lateinit var gitRepositoryListAdapter: GitRepositoryListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,53 +41,58 @@ class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val linearLayoutManager = LinearLayoutManager(requireContext())
-        val dividerItemDecoration =
-            DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
-
-        gitRepositoryListAdapter = GitRepositoryListAdapter()
-        gitRepositoryListAdapter?.setOnItemClickListener { item ->
-            gotoRepositoryFragment(item)
-        }
-
-        binding.apply {
-            searchInputText.setOnEditorActionListener { editText, action, _ ->
-                if (action == EditorInfo.IME_ACTION_SEARCH) {
-                    editText.text.toString().let {
-                        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                            viewModel.searchResults(it, requireContext()).let { items ->
-                                withContext(Dispatchers.Main) {
-                                    gitRepositoryListAdapter?.repositoryItems = items
-                                }
-                            }
-                        }
-                    }
-                    return@setOnEditorActionListener true
-                }
-                return@setOnEditorActionListener false
-            }
-
-            recyclerView.apply {
-                layoutManager = linearLayoutManager
-                addItemDecoration(dividerItemDecoration)
-                this.adapter = gitRepositoryListAdapter
-            }
-        }
+        initRecyclerView()
+        initSearchInput()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding.recyclerView.adapter = null
-        gitRepositoryListAdapter = null
         _binding = null
     }
 
-    private fun gotoRepositoryFragment(repoInfo: RepoInfo) {
-        val action =
-            RepositorySearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
-                repoInfo = repoInfo
-            )
+    private fun initRecyclerView() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        val dividerItemDecoration =
+            DividerItemDecoration(requireContext(), layoutManager.orientation)
+
+        gitRepositoryListAdapter = GitRepositoryListAdapter().apply {
+            setOnItemClickListener { item ->
+                navigateToRepositoryDetail(item)
+            }
+        }
+
+        binding.recyclerView.apply {
+            this.layoutManager = layoutManager
+            addItemDecoration(dividerItemDecoration)
+            adapter = gitRepositoryListAdapter
+        }
+    }
+
+    private fun initSearchInput() {
+        binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
+            if (action == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch(editText.text.toString())
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun performSearch(query: String) {
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val items = viewModel.searchResults(query, requireContext())
+            withContext(Dispatchers.Main) {
+                gitRepositoryListAdapter.repositoryItems = items
+            }
+        }
+    }
+
+    private fun navigateToRepositoryDetail(repoInfo: RepoInfo) {
+        val action = RepositorySearchFragmentDirections
+            .actionRepositoriesFragmentToRepositoryFragment(repoInfo = repoInfo)
         findNavController().navigate(action)
     }
+
 }
