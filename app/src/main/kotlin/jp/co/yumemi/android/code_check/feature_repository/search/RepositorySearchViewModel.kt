@@ -1,10 +1,9 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.code_check.feature_repository.search
 
 import android.content.Context
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.ktor.client.HttpClient
@@ -14,17 +13,18 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
+import jp.co.yumemi.android.code_check.R
+import jp.co.yumemi.android.code_check.feature_repository.search.data.remote.models.RepoInfo
 import kotlinx.coroutines.async
-import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
 
 /**
- * TwoFragment で使う
+ * RepositoryDetails で使う
  */
-class OneViewModel : ViewModel() {
+class RepositorySearchViewModel : ViewModel() {
 
     // 検索結果
-    suspend fun searchResults(inputText: String, context: Context): List<Item> =
+    suspend fun searchResults(inputText: String, context: Context): List<RepoInfo> =
         viewModelScope.async {
             if (inputText.isEmpty()) {
                 return@async emptyList()
@@ -39,7 +39,7 @@ class OneViewModel : ViewModel() {
             val jsonItems = requireNotNull(jsonBody.optJSONArray("items")) {
                 "'items' is missing or not an array in the response JSON."
             }
-            val items = mutableListOf<Item>()
+            val items = mutableListOf<RepoInfo>()
             /**
              * アイテムの個数分ループする
              */
@@ -55,7 +55,7 @@ class OneViewModel : ViewModel() {
                 val openIssuesCount = jsonItem.optLong("open_issues_count")
 
                 items.add(
-                    Item(
+                    RepoInfo(
                         name = name,
                         ownerIconUrl = ownerIconUrl,
                         language = context.getString(R.string.written_language, language),
@@ -70,14 +70,3 @@ class OneViewModel : ViewModel() {
 
         }.await()
 }
-
-@Parcelize
-data class Item(
-    val name: String,
-    val ownerIconUrl: String?,
-    val language: String,
-    val stargazersCount: Long,
-    val watchersCount: Long,
-    val forksCount: Long,
-    val openIssuesCount: Long,
-) : Parcelable

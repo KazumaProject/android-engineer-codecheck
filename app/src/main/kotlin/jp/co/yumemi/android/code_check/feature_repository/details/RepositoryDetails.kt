@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.code_check.feature_repository.details
 
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +11,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
 import java.util.Date
 
-class TwoFragment : Fragment(R.layout.fragment_two) {
+class RepositoryDetails : Fragment(R.layout.fragment_two) {
 
-    private val args: TwoFragmentArgs by navArgs()
+    private val args: RepositoryDetailsArgs by navArgs()
 
     private var _binding: FragmentTwoBinding? = null
     private val binding get() = _binding!!
@@ -35,9 +36,9 @@ class TwoFragment : Fragment(R.layout.fragment_two) {
 
         Log.d("検索した日時", Date().toString())
 
-        val item = args.item
+        val item = args.repoInfo
         binding.apply {
-            if (item.ownerIconUrl == null) ownerIconView.load(R.drawable.jetbrains) else ownerIconView.load(
+            ownerIconView.load(
                 item.ownerIconUrl
             )
             nameView.text = item.name
