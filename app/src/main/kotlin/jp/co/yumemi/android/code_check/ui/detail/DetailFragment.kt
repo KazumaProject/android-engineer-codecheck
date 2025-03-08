@@ -39,7 +39,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ownerIconView.load(
                 item.avatarUrl
             )
-            nameView.text = item.name
+            nameView.text = item.fullName
             languageView.text = item.language
             starsView.text = getString(R.string.stars_count, item.stargazersCount)
             watchersView.text = getString(R.string.watchers_count, item.watchersCount)
