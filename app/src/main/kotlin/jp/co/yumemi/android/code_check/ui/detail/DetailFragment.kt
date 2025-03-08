@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.detail
+package jp.co.yumemi.android.code_check.ui.detail
 
 import android.os.Bundle
 import android.util.Log
@@ -13,15 +13,15 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
+import jp.co.yumemi.android.code_check.databinding.FragmentDetailBinding
 import java.util.Date
 
 @AndroidEntryPoint
-class DetailFragment : Fragment(R.layout.fragment_two) {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val args: DetailFragmentArgs by navArgs()
 
-    private var _binding: FragmentTwoBinding? = null
+    private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class DetailFragment : Fragment(R.layout.fragment_two) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTwoBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,7 +41,7 @@ class DetailFragment : Fragment(R.layout.fragment_two) {
         val item = args.repoInfo
         binding.apply {
             ownerIconView.load(
-                item.ownerIconUrl
+                item.avatarUrl
             )
             nameView.text = item.name
             languageView.text = item.language

@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.search
+package jp.co.yumemi.android.code_check.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,16 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
-import jp.co.yumemi.android.code_check.domain.model.RepoInfo
+import jp.co.yumemi.android.code_check.databinding.FragmentSearchBinding
+import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(R.layout.fragment_one) {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private var _binding: FragmentOneBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels()
@@ -37,7 +37,7 @@ class SearchFragment : Fragment(R.layout.fragment_one) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOneBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -84,17 +84,17 @@ class SearchFragment : Fragment(R.layout.fragment_one) {
 
     private fun performSearch(query: String) {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val items = viewModel.searchResults(query, requireContext())
+            val items = viewModel.searchResults(query)
             withContext(Dispatchers.Main) {
                 gitRepositoryListAdapter.repositoryItems = items
             }
         }
     }
 
-    private fun navigateToRepositoryDetail(repoInfo: RepoInfo) {
+    private fun navigateToRepositoryDetail(repositorySearchResult: RepositorySearchResult) {
         val action =
             SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
-                repoInfo = repoInfo
+                repoInfo = repositorySearchResult
             )
         findNavController().navigate(action)
     }
