@@ -22,7 +22,7 @@ class SearchRepositoryImpl @Inject constructor(
                 }.body()
             result.items.map {
                 RepositorySearchResult(
-                    name = it.name,
+                    fullName = it.fullName,
                     language = it.language,
                     stargazersCount = it.stargazersCount,
                     watchersCount = it.watchersCount,

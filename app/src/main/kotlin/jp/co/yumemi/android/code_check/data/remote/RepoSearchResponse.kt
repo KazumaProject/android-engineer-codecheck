@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RepoSearchResponse(
-    @SerialName("full_name") val name: String,
+    @SerialName("full_name") val fullName: String,
     @SerialName("language") val language: String? = null,
     @SerialName("stargazers_count") val stargazersCount: Long,
     @SerialName("watchers_count") val watchersCount: Long,

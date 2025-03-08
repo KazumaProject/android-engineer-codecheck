@@ -19,7 +19,7 @@ class GitRepositoryListAdapter :
             oldItem: RepositorySearchResult,
             newItem: RepositorySearchResult
         ): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.fullName == newItem.fullName
         }
 
         override fun areContentsTheSame(
@@ -56,7 +56,7 @@ class GitRepositoryListAdapter :
 
     override fun onBindViewHolder(holder: GitRepositoryListViewHolder, position: Int) {
         val item = repositoryItems[position]
-        (holder.itemView.findViewById<TextView>(R.id.repositoryNameView)).text = item.name
+        (holder.itemView.findViewById<TextView>(R.id.repositoryNameView)).text = item.fullName
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { click ->
                 click(item)
