@@ -15,7 +15,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchRepositoriesUseCase: SearchRepositoriesUseCase
 ) : ViewModel() {
-    suspend fun searchResults(inputText: String): List<RepositorySearchResult> =
+    suspend fun searchResults(inputText: String): Result<List<RepositorySearchResult>> =
         viewModelScope.async {
             return@async searchRepositoriesUseCase.search(inputText)
         }.await()

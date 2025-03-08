@@ -4,6 +4,7 @@
 package jp.co.yumemi.android.code_check.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
@@ -83,11 +85,26 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun performSearch(query: String) {
-        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val items = viewModel.searchResults(query)
-            withContext(Dispatchers.Main) {
-                gitRepositoryListAdapter.repositoryItems = items
+        viewLifecycleOwner.lifecycleScope.launch {
+            // Perform the search on the IO dispatcher
+            val result = withContext(Dispatchers.IO) {
+                viewModel.searchResults(query)
             }
+
+            // Process the result on the Main thread
+            result.fold(
+                onSuccess = { repositories ->
+                    gitRepositoryListAdapter.repositoryItems = repositories
+                },
+                onFailure = { error ->
+                    Log.e("SearchRepositoryError", "Error: ${error.message}", error)
+                    val errorMessage = when (error.message) {
+                        "Illegal input" -> "不正な入力です。入力を確認してください。"
+                        else -> error.message ?: "エラーが発生しました"
+                    }
+                    Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_LONG).show()
+                }
+            )
         }
     }
 
