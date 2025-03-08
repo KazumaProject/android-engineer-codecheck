@@ -6,7 +6,6 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import jp.co.yumemi.android.code_check.data.remote.GitHubSearchResult
-import jp.co.yumemi.android.code_check.data.remote.RepoSearchResponse
 import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 import jp.co.yumemi.android.code_check.domain.repository.SearchRepository
 import javax.inject.Inject

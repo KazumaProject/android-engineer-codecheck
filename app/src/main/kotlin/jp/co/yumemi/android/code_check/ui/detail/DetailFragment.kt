@@ -13,15 +13,15 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
+import jp.co.yumemi.android.code_check.databinding.FragmentDetailBinding
 import java.util.Date
 
 @AndroidEntryPoint
-class DetailFragment : Fragment(R.layout.fragment_two) {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val args: DetailFragmentArgs by navArgs()
 
-    private var _binding: FragmentTwoBinding? = null
+    private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class DetailFragment : Fragment(R.layout.fragment_two) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTwoBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

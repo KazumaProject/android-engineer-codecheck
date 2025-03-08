@@ -17,16 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import jp.co.yumemi.android.code_check.databinding.FragmentSearchBinding
 import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(R.layout.fragment_one) {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private var _binding: FragmentOneBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels()
@@ -37,7 +37,7 @@ class SearchFragment : Fragment(R.layout.fragment_one) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOneBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
