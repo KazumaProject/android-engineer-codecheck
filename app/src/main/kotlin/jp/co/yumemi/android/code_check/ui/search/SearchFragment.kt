@@ -86,12 +86,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun performSearch(query: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            // Perform the search on the IO dispatcher
             val result = withContext(Dispatchers.IO) {
                 viewModel.searchResults(query)
             }
 
-            // Process the result on the Main thread
             result.fold(
                 onSuccess = { repositories ->
                     gitRepositoryListAdapter.repositoryItems = repositories
