@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.data.source.network.RepoInfo
+import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

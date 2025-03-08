@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.data.source.network.RepoInfo
+import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 
 class GitRepositoryListAdapter :
     RecyclerView.Adapter<GitRepositoryListAdapter.GitRepositoryListViewHolder>() {

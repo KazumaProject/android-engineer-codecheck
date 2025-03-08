@@ -14,7 +14,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.data.source.network.RepoInfo
+import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 import kotlinx.coroutines.async
 import org.json.JSONObject
 
