@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.call.receive
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -39,7 +40,7 @@ class SearchViewModel @Inject constructor(
                     parameter("q", inputText)
                 }
 
-            val jsonBody = JSONObject(response.receive<String>())
+            val jsonBody = JSONObject(response.body<String>())
             val jsonItems = requireNotNull(jsonBody.optJSONArray("items")) {
                 "'items' is missing or not an array in the response JSON."
             }
