@@ -6,9 +6,9 @@ package jp.co.yumemi.android.code_check.reposearch
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
-import io.ktor.client.engine.android.Android
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
@@ -17,11 +17,15 @@ import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 import kotlinx.coroutines.async
 import org.json.JSONObject
+import javax.inject.Inject
 
 /**
  * RepositoryDetails で使う
  */
-class RepositorySearchViewModel : ViewModel() {
+@HiltViewModel
+class RepositorySearchViewModel @Inject constructor(
+    private val httpClient: HttpClient
+) : ViewModel() {
 
     // 検索結果
     suspend fun searchResults(inputText: String, context: Context): List<RepoInfo> =
@@ -29,11 +33,11 @@ class RepositorySearchViewModel : ViewModel() {
             if (inputText.isEmpty()) {
                 return@async emptyList()
             }
-            val client = HttpClient(Android)
-            val response: HttpResponse = client.get("https://api.github.com/search/repositories") {
-                header("Accept", "application/vnd.github.v3+json")
-                parameter("q", inputText)
-            }
+            val response: HttpResponse =
+                httpClient.get("https://api.github.com/search/repositories") {
+                    header("Accept", "application/vnd.github.v3+json")
+                    parameter("q", inputText)
+                }
 
             val jsonBody = JSONObject(response.receive<String>())
             val jsonItems = requireNotNull(jsonBody.optJSONArray("items")) {
