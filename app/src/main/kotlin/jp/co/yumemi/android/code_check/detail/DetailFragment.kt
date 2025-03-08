@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.feature_repository.details
+package jp.co.yumemi.android.code_check.detail
 
 import android.os.Bundle
 import android.util.Log
@@ -11,13 +11,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
 import java.util.Date
 
-class RepositoryDetails : Fragment(R.layout.fragment_two) {
+@AndroidEntryPoint
+class DetailFragment : Fragment(R.layout.fragment_two) {
 
-    private val args: RepositoryDetailsArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
     private var _binding: FragmentTwoBinding? = null
     private val binding get() = _binding!!
