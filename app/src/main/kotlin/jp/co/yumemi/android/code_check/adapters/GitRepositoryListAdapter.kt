@@ -8,37 +8,37 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.data.remote.RepoSearchResponse
+import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 
 class GitRepositoryListAdapter :
     RecyclerView.Adapter<GitRepositoryListAdapter.GitRepositoryListViewHolder>() {
     inner class GitRepositoryListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<RepoSearchResponse>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<RepositorySearchResult>() {
         override fun areItemsTheSame(
-            oldItem: RepoSearchResponse,
-            newItem: RepoSearchResponse
+            oldItem: RepositorySearchResult,
+            newItem: RepositorySearchResult
         ): Boolean {
             return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(
-            oldItem: RepoSearchResponse,
-            newItem: RepoSearchResponse
+            oldItem: RepositorySearchResult,
+            newItem: RepositorySearchResult
         ): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
 
-    private var onItemClickListener: ((RepoSearchResponse) -> Unit)? = null
+    private var onItemClickListener: ((RepositorySearchResult) -> Unit)? = null
 
-    fun setOnItemClickListener(onItemClick: (RepoSearchResponse) -> Unit) {
+    fun setOnItemClickListener(onItemClick: (RepositorySearchResult) -> Unit) {
         this.onItemClickListener = onItemClick
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    var repositoryItems: List<RepoSearchResponse>
+    var repositoryItems: List<RepositorySearchResult>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 

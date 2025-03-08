@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.data.remote.RepoSearchResponse
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -91,10 +91,10 @@ class SearchFragment : Fragment(R.layout.fragment_one) {
         }
     }
 
-    private fun navigateToRepositoryDetail(repoSearchResponse: RepoSearchResponse) {
+    private fun navigateToRepositoryDetail(repositorySearchResult: RepositorySearchResult) {
         val action =
             SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
-                repoInfo = repoSearchResponse
+                repoInfo = repositorySearchResult
             )
         findNavController().navigate(action)
     }

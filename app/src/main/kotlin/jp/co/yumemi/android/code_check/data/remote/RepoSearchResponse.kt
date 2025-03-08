@@ -1,12 +1,9 @@
 package jp.co.yumemi.android.code_check.data.remote
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Parcelize
 @Serializable
 data class RepoSearchResponse(
     @SerialName("full_name") val name: String,
@@ -16,10 +13,9 @@ data class RepoSearchResponse(
     @SerialName("forks_count") val forksCount: Long,
     @SerialName("open_issues_count") val openIssuesCount: Long,
     val owner: @RawValue OwnerResponse?
-) : Parcelable {
-    @Parcelize
+) {
     @Serializable
     data class OwnerResponse(
         @SerialName("avatar_url") val avatarUrl: String
-    ) : Parcelable
+    )
 }
