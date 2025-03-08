@@ -4,7 +4,6 @@
 package jp.co.yumemi.android.code_check.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentDetailBinding
-import java.util.Date
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
@@ -35,7 +33,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         val item = args.repoInfo
         binding.apply {
             ownerIconView.load(
