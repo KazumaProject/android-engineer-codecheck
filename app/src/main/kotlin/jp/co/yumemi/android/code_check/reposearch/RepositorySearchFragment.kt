@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.feature_repository.search
+package jp.co.yumemi.android.code_check.reposearch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
-import jp.co.yumemi.android.code_check.feature_repository.search.data.remote.models.RepoInfo
+import jp.co.yumemi.android.code_check.feature_repository.search.RepositorySearchFragmentDirections
+import jp.co.yumemi.android.code_check.data.remote.models.RepoInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -90,8 +91,10 @@ class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
     }
 
     private fun navigateToRepositoryDetail(repoInfo: RepoInfo) {
-        val action = RepositorySearchFragmentDirections
-            .actionRepositoriesFragmentToRepositoryFragment(repoInfo = repoInfo)
+        val action =
+            RepositorySearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
+                repoInfo = repoInfo
+            )
         findNavController().navigate(action)
     }
 

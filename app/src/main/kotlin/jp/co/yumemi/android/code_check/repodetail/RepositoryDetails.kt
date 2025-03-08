@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.feature_repository.details
+package jp.co.yumemi.android.code_check.repodetail
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
+import jp.co.yumemi.android.code_check.feature_repository.details.RepositoryDetailsArgs
 import java.util.Date
 
 class RepositoryDetails : Fragment(R.layout.fragment_two) {

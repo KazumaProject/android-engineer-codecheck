@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.feature_repository.search
+package jp.co.yumemi.android.code_check.reposearch
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 import jp.co.yumemi.android.code_check.R
-import jp.co.yumemi.android.code_check.feature_repository.search.data.remote.models.RepoInfo
+import jp.co.yumemi.android.code_check.data.remote.models.RepoInfo
 import kotlinx.coroutines.async
 import org.json.JSONObject
 

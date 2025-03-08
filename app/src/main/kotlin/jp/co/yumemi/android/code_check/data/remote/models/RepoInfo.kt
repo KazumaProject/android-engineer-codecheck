@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check.feature_repository.search.data.remote.models
+package jp.co.yumemi.android.code_check.data.remote.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
