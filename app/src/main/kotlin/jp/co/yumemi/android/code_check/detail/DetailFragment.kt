@@ -41,7 +41,7 @@ class DetailFragment : Fragment(R.layout.fragment_two) {
         val item = args.repoInfo
         binding.apply {
             ownerIconView.load(
-                item.ownerIconUrl
+                item.owner?.avatarUrl
             )
             nameView.text = item.name
             languageView.text = item.language
