@@ -18,7 +18,7 @@ import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import jp.co.yumemi.android.code_check.feature_repository.search.RepositorySearchFragmentDirections
-import jp.co.yumemi.android.code_check.data.remote.models.RepoInfo
+import jp.co.yumemi.android.code_check.data.source.network.RepoInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
