@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Parcelize
-@kotlinx.serialization.Serializable
+@Serializable
 data class RepoSearchResponse(
     @SerialName("full_name") val name: String,
     @SerialName("language") val language: String? = null,
