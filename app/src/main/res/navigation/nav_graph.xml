@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/oneFragment"
-        android:name="jp.co.yumemi.android.code_check.reposearch.RepositorySearchFragment"
+        android:name="jp.co.yumemi.android.code_check.search.RepositorySearchFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_one">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/twoFragment"
-        android:name="jp.co.yumemi.android.code_check.repodetail.RepositoryDetails"
+        android:name="jp.co.yumemi.android.code_check.detail.RepositoryDetails"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_two">
         <argument

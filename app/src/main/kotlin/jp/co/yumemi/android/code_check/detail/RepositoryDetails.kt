@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.repodetail
+package jp.co.yumemi.android.code_check.detail
 
 import android.os.Bundle
 import android.util.Log

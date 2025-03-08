@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check.reposearch
+package jp.co.yumemi.android.code_check.search
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
