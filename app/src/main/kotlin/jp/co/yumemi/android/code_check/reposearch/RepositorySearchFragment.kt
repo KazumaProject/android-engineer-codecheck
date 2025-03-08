@@ -14,15 +14,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
-import jp.co.yumemi.android.code_check.feature_repository.search.RepositorySearchFragmentDirections
 import jp.co.yumemi.android.code_check.data.source.network.RepoInfo
+import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
 
     private var _binding: FragmentOneBinding? = null
