@@ -20,10 +20,10 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 /**
- * RepositoryDetails で使う
+ * DetailFragment で使う
  */
 @HiltViewModel
-class RepositorySearchViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val httpClient: HttpClient
 ) : ViewModel() {
 

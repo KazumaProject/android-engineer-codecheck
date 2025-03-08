@@ -17,9 +17,9 @@ import jp.co.yumemi.android.code_check.databinding.FragmentTwoBinding
 import java.util.Date
 
 @AndroidEntryPoint
-class RepositoryDetails : Fragment(R.layout.fragment_two) {
+class DetailFragment : Fragment(R.layout.fragment_two) {
 
-    private val args: RepositoryDetailsArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
     private var _binding: FragmentTwoBinding? = null
     private val binding get() = _binding!!

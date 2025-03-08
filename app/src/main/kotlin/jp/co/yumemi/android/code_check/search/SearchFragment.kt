@@ -17,19 +17,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.adapters.GitRepositoryListAdapter
-import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 import jp.co.yumemi.android.code_check.databinding.FragmentOneBinding
+import jp.co.yumemi.android.code_check.domain.model.RepoInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
+class SearchFragment : Fragment(R.layout.fragment_one) {
 
     private var _binding: FragmentOneBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RepositorySearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
     private lateinit var gitRepositoryListAdapter: GitRepositoryListAdapter
 
     override fun onCreateView(
@@ -93,7 +93,7 @@ class RepositorySearchFragment : Fragment(R.layout.fragment_one) {
 
     private fun navigateToRepositoryDetail(repoInfo: RepoInfo) {
         val action =
-            RepositorySearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
+            SearchFragmentDirections.actionRepositoriesFragmentToRepositoryFragment(
                 repoInfo = repoInfo
             )
         findNavController().navigate(action)
