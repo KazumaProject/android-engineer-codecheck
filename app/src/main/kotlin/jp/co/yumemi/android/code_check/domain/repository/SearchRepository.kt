@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.code_check.domain.repository
 
-import io.ktor.client.statement.HttpResponse
+import jp.co.yumemi.android.code_check.data.remote.RepoSearchResponse
 
 interface SearchRepository {
-    suspend fun searchRepositories(query: String): HttpResponse
+    suspend fun searchRepositories(query: String): List<RepoSearchResponse>
 }
