@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.code_check.data.repository
 
-import jp.co.yumemi.android.code_check.TestHttpClientProvider
+import com.kazumaproject.core_testing.TestHttpClientProvider
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

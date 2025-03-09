@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.code_check.ui.search
 
-import jp.co.yumemi.android.code_check.TestHttpClientProvider
+import com.kazumaproject.core_testing.TestHttpClientProvider
 import jp.co.yumemi.android.code_check.data.repository.SearchRepositoryImpl
 import jp.co.yumemi.android.code_check.domain.usecase.SearchRepositoriesUseCase
 import junit.framework.TestCase
