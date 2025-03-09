@@ -1,6 +1,6 @@
 package jp.co.yumemi.android.code_check.domain.usecase
 
-import jp.co.yumemi.android.code_check.TestHttpClientProvider
+import com.kazumaproject.core_testing.TestHttpClientProvider
 import jp.co.yumemi.android.code_check.data.repository.SearchRepositoryImpl
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull

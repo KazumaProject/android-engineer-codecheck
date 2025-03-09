@@ -1,4 +1,4 @@
-package jp.co.yumemi.android.code_check
+package com.kazumaproject.core_testing
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
