@@ -12,10 +12,12 @@ data class RepoSearchResponse(
     @SerialName("watchers_count") val watchersCount: Long,
     @SerialName("forks_count") val forksCount: Long,
     @SerialName("open_issues_count") val openIssuesCount: Long,
+    @SerialName("description") val description: String?,
     val owner: @RawValue OwnerResponse?
 ) {
     @Serializable
     data class OwnerResponse(
-        @SerialName("avatar_url") val avatarUrl: String
+        @SerialName("avatar_url") val avatarUrl: String,
+        @SerialName("login") val login: String
     )
 }
