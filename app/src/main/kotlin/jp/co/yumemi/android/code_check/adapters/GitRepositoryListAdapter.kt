@@ -61,12 +61,14 @@ class GitRepositoryListAdapter :
         val decimalFormat = DecimalFormat("#,###.##")
         val item = repositoryItems[position]
         holder.itemView.apply {
-            (findViewById<MaterialTextView>(R.id.repositoryNameView)).text =
+            findViewById<MaterialTextView>(R.id.ownerLoginNameView).text = item.login
+            findViewById<MaterialTextView>(R.id.repositoryNameView).text =
                 item.fullName
-            (findViewById<ShapeableImageView>(R.id.avatarUrlImageView)).load(item.avatarUrl)
-            (findViewById<MaterialTextView>(R.id.repositoryStarNumberView)).text =
+            findViewById<ShapeableImageView>(R.id.avatarUrlImageView).load(item.avatarUrl)
+            findViewById<MaterialTextView>(R.id.repositoryDescriptionView).text = item.description
+            findViewById<MaterialTextView>(R.id.repositoryStarNumberView).text =
                 decimalFormat.format(item.stargazersCount)
-            (findViewById<MaterialTextView>(R.id.repositoryLanguageTextView)).text = item.language
+            findViewById<MaterialTextView>(R.id.repositoryLanguageTextView).text = item.language
             setOnClickListener {
                 onItemClickListener?.let { click ->
                     click(item)

@@ -12,5 +12,7 @@ data class RepositorySearchResult(
     val watchersCount: Long,
     val forksCount: Long,
     val openIssuesCount: Long,
-    val avatarUrl: String?
+    val avatarUrl: String?,
+    val login: String?,
+    val description: String?
 ) : Parcelable

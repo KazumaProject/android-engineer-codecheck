@@ -28,7 +28,9 @@ class SearchRepositoryImpl @Inject constructor(
                     watchersCount = it.watchersCount,
                     forksCount = it.forksCount,
                     openIssuesCount = it.openIssuesCount,
-                    avatarUrl = it.owner?.avatarUrl
+                    avatarUrl = it.owner?.avatarUrl,
+                    login = it.owner?.login,
+                    description = it.description
                 )
             }
         }
