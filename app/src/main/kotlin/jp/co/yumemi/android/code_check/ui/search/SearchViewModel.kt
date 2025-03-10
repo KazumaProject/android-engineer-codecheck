@@ -3,6 +3,7 @@
  */
 package jp.co.yumemi.android.code_check.ui.search
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val searchRepositoriesUseCase: SearchRepositoriesUseCase
 ) : ViewModel() {
+
+    val repositoryItems = MutableLiveData<List<RepositorySearchResult>>()
     suspend fun searchResults(inputText: String): Result<List<RepositorySearchResult>> =
         viewModelScope.async {
             return@async searchRepositoriesUseCase.search(inputText)
