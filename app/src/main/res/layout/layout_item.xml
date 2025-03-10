@@ -3,19 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:paddingHorizontal="8dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="12dp">
 
-    <TextView
-        android:id="@+id/repositoryNameView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatarUrlImageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/jetbrains"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImage" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ownerLoginNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="@string/owner_login_placeholder"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/avatarUrlImageView"
+        app:layout_constraintStart_toEndOf="@+id/avatarUrlImageView"
+        app:layout_constraintTop_toTopOf="@+id/avatarUrlImageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repositoryNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/repository_name_placeholder"
+        android:textColor="@color/repository_full_name"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/avatarUrlImageView"
+        app:layout_constraintTop_toBottomOf="@+id/avatarUrlImageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repositoryDescriptionView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/repository_description_placeholder"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/repositoryNameView"
+        app:layout_constraintTop_toBottomOf="@+id/repositoryNameView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/repositoryStarImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/round_star_24"
+        android:tint="@color/star_bg"
+        app:layout_constraintStart_toStartOf="@+id/repositoryDescriptionView"
+        app:layout_constraintTop_toBottomOf="@+id/repositoryDescriptionView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repositoryStarNumberView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/repository_star_number_placeholder"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/repositoryStarImageView"
+        app:layout_constraintStart_toEndOf="@+id/repositoryStarImageView"
+        app:layout_constraintTop_toTopOf="@+id/repositoryStarImageView" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/languageCircleImageView"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/baseline_circle_24"
+        app:layout_constraintBottom_toBottomOf="@+id/repositoryStarImageView"
+        app:layout_constraintStart_toEndOf="@+id/repositoryStarNumberView"
+        app:layout_constraintTop_toTopOf="@+id/repositoryStarImageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/repositoryLanguageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/repository_language_placeholder"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/languageCircleImageView"
+        app:layout_constraintStart_toEndOf="@+id/languageCircleImageView"
+        app:layout_constraintTop_toTopOf="@+id/languageCircleImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

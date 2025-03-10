@@ -21,4 +21,7 @@
         <item name="boxBackgroundMode">none</item>
     </style>
 
+    <style name="RoundedImage">
+        <item name="cornerSize">8dp</item>
+    </style>
 </resources>

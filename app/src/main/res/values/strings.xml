@@ -10,4 +10,9 @@
     <string name="watchers_view_placeholder">38530 watchers</string>
     <string name="forks_view_placeholder">4675 forks</string>
     <string name="open_issues_view_placeholder">131 open issues</string>
+    <string name="repository_name_placeholder">full_name</string>
+    <string name="owner_login_placeholder">owner_login</string>
+    <string name="repository_description_placeholder">repository_description</string>
+    <string name="repository_star_number_placeholder">345</string>
+    <string name="repository_language_placeholder">Kotlin</string>
 </resources>

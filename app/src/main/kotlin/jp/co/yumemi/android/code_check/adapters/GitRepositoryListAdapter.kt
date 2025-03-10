@@ -3,12 +3,15 @@ package jp.co.yumemi.android.code_check.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.textview.MaterialTextView
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
+import java.text.DecimalFormat
 
 class GitRepositoryListAdapter :
     RecyclerView.Adapter<GitRepositoryListAdapter.GitRepositoryListViewHolder>() {
@@ -55,11 +58,19 @@ class GitRepositoryListAdapter :
     }
 
     override fun onBindViewHolder(holder: GitRepositoryListViewHolder, position: Int) {
+        val decimalFormat = DecimalFormat("#,###.##")
         val item = repositoryItems[position]
-        (holder.itemView.findViewById<TextView>(R.id.repositoryNameView)).text = item.fullName
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.let { click ->
-                click(item)
+        holder.itemView.apply {
+            (findViewById<MaterialTextView>(R.id.repositoryNameView)).text =
+                item.fullName
+            (findViewById<ShapeableImageView>(R.id.avatarUrlImageView)).load(item.avatarUrl)
+            (findViewById<MaterialTextView>(R.id.repositoryStarNumberView)).text =
+                decimalFormat.format(item.stargazersCount)
+            (findViewById<MaterialTextView>(R.id.repositoryLanguageTextView)).text = item.language
+            setOnClickListener {
+                onItemClickListener?.let { click ->
+                    click(item)
+                }
             }
         }
     }
