@@ -47,6 +47,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initSearchInput()
+        viewModel.repositoryItems.observe(viewLifecycleOwner) { items ->
+            gitRepositoryListAdapter.repositoryItems = items
+        }
     }
 
     override fun onDestroyView() {
@@ -97,7 +100,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
             result.fold(
                 onSuccess = { repositories ->
-                    gitRepositoryListAdapter.repositoryItems = repositories
+                    viewModel.repositoryItems.value = repositories
                 },
                 onFailure = { error ->
                     Log.e("SearchRepositoryError", "Error: ${error.message}", error)
