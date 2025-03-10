@@ -7,6 +7,7 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import jp.co.yumemi.android.code_check.data.remote.GitHubSearchResult
 import jp.co.yumemi.android.code_check.data.remote.ReadmeResponse
+import jp.co.yumemi.android.code_check.domain.model.RepositoryREADMEResult
 import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
 import jp.co.yumemi.android.code_check.domain.repository.SearchRepository
 import javax.inject.Inject
@@ -36,8 +37,16 @@ class SearchRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun fetchReadme(fullName: String): Result<ReadmeResponse> {
+    override suspend fun fetchReadme(fullName: String): Result<RepositoryREADMEResult> {
         val url = "https://api.github.com/repos/$fullName/readme"
-        return httpClient.get(url).body()
+        return runCatching {
+            val result: ReadmeResponse = httpClient.get(url).body()
+            RepositoryREADMEResult(
+                name = result.name,
+                path = result.path,
+                content = result.content,
+                encoding = result.encoding
+            )
+        }
     }
 }
