@@ -15,4 +15,5 @@
     <string name="repository_description_placeholder">repository_description</string>
     <string name="repository_star_number_placeholder">345</string>
     <string name="repository_language_placeholder">Kotlin</string>
+    <string name="readme_placeholder">README がありません。</string>
 </resources>

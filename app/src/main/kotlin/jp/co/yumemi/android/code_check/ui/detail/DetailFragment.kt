@@ -5,6 +5,7 @@ package jp.co.yumemi.android.code_check.ui.detail
 
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,10 +64,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 onSuccess = {
                     val decodedBytes = Base64.decode(it.content, Base64.DEFAULT)
                     val rawMarkdown = String(decodedBytes)
-                    markwon.setMarkdown(binding.readmeTextView, rawMarkdown)
+                    if (rawMarkdown.isEmpty() || rawMarkdown.isBlank()) {
+                        binding.readmeTextView.text = getString(R.string.readme_placeholder)
+                    } else {
+                        markwon.setMarkdown(binding.readmeTextView, rawMarkdown)
+                    }
                 },
                 onFailure = {
-                    Snackbar.make(requireView(), "No README", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG).show()
+                    Log.e("Error to fetch README: ", it.message.toString())
                 }
             )
         }

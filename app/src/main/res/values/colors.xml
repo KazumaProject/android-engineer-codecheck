@@ -10,4 +10,5 @@
     <color name="searchview_bg">#FFFFFFFF</color>
     <color name="star_bg">#f1e05a</color>
     <color name="repository_full_name">#FF000000</color>
+    <color name="blue">#0066CC</color>
 </resources>
