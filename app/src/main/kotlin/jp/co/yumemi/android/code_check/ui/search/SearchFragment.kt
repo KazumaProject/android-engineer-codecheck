@@ -76,6 +76,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun initSearchInput() {
         binding.searchInputText.setOnEditorActionListener { editText, action, _ ->
             if (action == EditorInfo.IME_ACTION_SEARCH) {
+                val textInEditText = editText.text.toString()
+                if (textInEditText.isEmpty() || textInEditText.isBlank()) {
+                    gitRepositoryListAdapter.repositoryItems = emptyList()
+                    return@setOnEditorActionListener true
+                }
                 performSearch(editText.text.toString())
                 true
             } else {
