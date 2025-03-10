@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
@@ -47,6 +48,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val item = args.repoInfo
+        binding.apply {
+            detailAvatarUrlImageView.load(item.avatarUrl)
+            detailOwnerLogin.text = item.login
+            nameView.text = item.fullName
+            detailRepositoryDescription.text = item.description
+            starsView.text = getString(R.string.stars_count, item.stargazersCount)
+            forkView.text = getString(R.string.forks_count, item.forksCount)
+            openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
+            watchersView.text = getString(R.string.watchers_count, item.watchersCount)
+            languageView.text = item.language
+        }
         fetchREADME(item.fullName, markwon)
     }
 
