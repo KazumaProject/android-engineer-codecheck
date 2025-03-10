@@ -54,7 +54,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             nameView.text = item.fullName
             detailRepositoryDescription.text = item.description
             starsView.text = getString(R.string.stars_count, item.stargazersCount)
-            forkView.text = getString(R.string.forks_count, item.forksCount)
+            forksView.text = getString(R.string.forks_count, item.forksCount)
             openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
             watchersView.text = getString(R.string.watchers_count, item.watchersCount)
             languageView.text = item.language

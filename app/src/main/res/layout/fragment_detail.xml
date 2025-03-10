@@ -80,7 +80,7 @@
             app:layout_constraintTop_toTopOf="@+id/starsView" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/forkView"
+            android:id="@+id/forksView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

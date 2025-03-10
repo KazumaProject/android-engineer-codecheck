@@ -47,11 +47,11 @@ class TopActivityTest {
         onView(withId(R.id.searchInputText)).perform(pressImeActionButton())
         onView(withId(R.id.recyclerView)).perform(waitForRecyclerViewItemCount(1, 5000))
         onView(withId(R.id.recyclerView)).perform(
-                actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                    0,
-                    click()
-                )
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
             )
+        )
         onView(withId(R.id.nameView)).check(matches(withText("MyTestRepo")))
         onView(withId(R.id.languageView)).check(matches(withText("Kotlin")))
         onView(withId(R.id.starsView)).check(matches(withText("42 stars")))
