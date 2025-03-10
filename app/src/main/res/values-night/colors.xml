@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="searchview_bg">#FF000000</color>
+    <color name="star_bg">#facc15</color>
+    <color name="repository_full_name">#FFFFFFFF</color>
 </resources>
