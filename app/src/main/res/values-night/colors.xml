@@ -11,4 +11,6 @@
     <color name="star_bg">#facc15</color>
     <color name="repository_full_name">#FFFFFFFF</color>
     <color name="blue">#66B3FF</color>
+    <color name="green">#1ABC9C</color>
+    <color name="yellow">#FFD54F</color>
 </resources>

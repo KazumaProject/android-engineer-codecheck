@@ -1,5 +1,7 @@
 package jp.co.yumemi.android.code_check.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.domain.model.RepositorySearchResult
+import jp.co.yumemi.android.code_check.util.LanguageColors
 import java.text.DecimalFormat
 
 class GitRepositoryListAdapter :
@@ -68,6 +71,8 @@ class GitRepositoryListAdapter :
             findViewById<MaterialTextView>(R.id.repositoryDescriptionView).text = item.description
             findViewById<MaterialTextView>(R.id.repositoryStarNumberView).text =
                 decimalFormat.format(item.stargazersCount)
+            findViewById<ShapeableImageView>(R.id.languageCircleImageView).imageTintList =
+                ColorStateList.valueOf(Color.parseColor(LanguageColors.getColor(item.language)))
             findViewById<MaterialTextView>(R.id.repositoryLanguageTextView).text = item.language
             setOnClickListener {
                 onItemClickListener?.let { click ->

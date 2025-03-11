@@ -23,8 +23,10 @@ object TestHttpClientProvider {
                             "forks_count": 10,
                             "open_issues_count": 5,
                             "owner": {
+                                "login": "ownerName"
                                 "avatar_url": "https://example.com/avatar.png"
-                            }
+                            },
+                            "description": "Description"
                         }
                     ]
                 }

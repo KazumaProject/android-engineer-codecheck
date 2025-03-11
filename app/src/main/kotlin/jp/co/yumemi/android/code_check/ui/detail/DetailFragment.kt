@@ -3,6 +3,8 @@
  */
 package jp.co.yumemi.android.code_check.ui.detail
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -13,11 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentDetailBinding
+import jp.co.yumemi.android.code_check.util.LanguageColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -47,6 +51,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val item = args.repoInfo
+        binding.apply {
+            detailAvatarUrlImageView.load(item.avatarUrl)
+            detailOwnerLogin.text = item.login
+            nameView.text = item.fullName
+            detailRepositoryDescription.text = item.description
+            starsView.text = getString(R.string.stars_count, item.stargazersCount)
+            forksView.text = getString(R.string.forks_count, item.forksCount)
+            openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
+            watchersView.text = getString(R.string.watchers_count, item.watchersCount)
+            languageView.text = item.language
+            detailLanguageImageView.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(LanguageColors.getColor(item.language)))
+        }
         fetchREADME(item.fullName, markwon)
     }
 
