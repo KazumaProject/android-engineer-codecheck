@@ -116,7 +116,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:background="@drawable/baseline_circle_24"
             app:layout_constraintEnd_toEndOf="@+id/detailWatchImageView"
             app:layout_constraintStart_toStartOf="@+id/detailWatchImageView"
             app:layout_constraintTop_toBottomOf="@+id/detailWatchImageView"

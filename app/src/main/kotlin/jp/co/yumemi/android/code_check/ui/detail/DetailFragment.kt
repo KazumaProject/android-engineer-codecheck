@@ -3,6 +3,8 @@
  */
 package jp.co.yumemi.android.code_check.ui.detail
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -19,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import jp.co.yumemi.android.code_check.R
 import jp.co.yumemi.android.code_check.databinding.FragmentDetailBinding
+import jp.co.yumemi.android.code_check.util.LanguageColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -58,6 +61,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             openIssuesView.text = getString(R.string.open_issues_count, item.openIssuesCount)
             watchersView.text = getString(R.string.watchers_count, item.watchersCount)
             languageView.text = item.language
+            detailLanguageImageView.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor(LanguageColors.getColor(item.language)))
         }
         fetchREADME(item.fullName, markwon)
     }
