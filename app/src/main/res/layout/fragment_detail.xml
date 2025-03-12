@@ -75,6 +75,7 @@
             android:layout_height="16dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/fork"
+            android:tint="@color/fork_color"
             app:layout_constraintBottom_toBottomOf="@+id/starsView"
             app:layout_constraintStart_toEndOf="@+id/starsView"
             app:layout_constraintTop_toTopOf="@+id/starsView" />
