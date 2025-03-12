@@ -1,8 +1,10 @@
-# 株式会社ゆめみ Android エンジニアコードチェック課題
+# 株式会社ゆめみ Android エンジニアコードチェック課題に挑戦してみた💪
 
 ## 概要
 
-本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に Android エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
+[株式会社ゆめみ Android エンジニアコードチェック課題](https://github.com/yumemi-inc/android-engineer-codecheck)
+
+[ゆめみの Android の採用コーディング試験を公開しました](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f)
 
 ## アプリ仕様
 
@@ -12,48 +14,31 @@
 
 ### 環境
 
-- IDE：Android Studio Flamingo | 2022.2.1 Patch 2
-- Kotlin：1.6.21
+- IDE：Android Studio Meerkat | 2024.3.1
+- Kotlin：1.9.21
 - Java：17
-- Gradle：8.0
-- minSdk：23
-- targetSdk：31
-
-※ ライブラリの利用はオープンソースのものに限ります。
-※ 環境は適宜更新してください。
+- Gradle：8.9
+- minSdk：24
+- targetSdk：35
 
 ### 動作
 
 1. 何かしらのキーワードを入力
 2. GitHub API（`search/repositories`）でリポジトリを検索し、結果一覧を概要（リポジトリ名）で表示
-3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）と README を Markdown で表示
 
-## 課題取り組み方法
+### 取り組んだこと
 
-Issues を確認した上、本プロジェクトを [**Duplicate** してください](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository)（Fork しないようにしてください。必要ならプライベートリポジトリにしても大丈夫です）。今後のコミットは全てご自身のリポジトリで行ってください。
+- [公式推奨](https://developer.android.com/topic/architecture?hl=ja)のアーキテクチャやサンプルプロジェクトを参考に設計
 
-コードチェックの課題 Issue は全て [`課題`](https://github.com/yumemi-inc/android-engineer-codecheck/milestone/1) Milestone がついており、難易度に応じて Label が [`初級`](https://github.com/yumemi-inc/android-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A初級+milestone%3A課題)、[`中級`](https://github.com/yumemi-inc/android-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3A中級+milestone%3A課題+) と [`ボーナス`](https://github.com/yumemi-inc/android-engineer-codecheck/issues?q=is%3Aopen+is%3Aissue+label%3Aボーナス+milestone%3A課題+) に分けられています。課題の必須／選択は下記の表とします。
+- 詳細ページで`README.md`を Markdown で表示する
 
-|   | 初級 | 中級 | ボーナス
-|--:|:--:|:--:|:--:|
-| 新卒／未経験者 | 必須 | 選択 | 選択 |
-| 中途／経験者 | 必須 | 必須 | 選択 |
+- 言語に対応するカラーアイコンを作成する [参考](https://github.com/ozh/github-colors)
 
-課題 Issueをご自身のリポジトリーにコピーするGitHub Actionsをご用意しております。  
-[こちらのWorkflow](./.github/workflows/android-tests.yml)を[手動でトリガーする](https://docs.github.com/ja/actions/managing-workflow-runs/manually-running-a-workflow)ことでコピーできますのでご活用下さい。
+- ユニットテスト、E2E テストの作成。GitHub Actions の CI でのテスト環境の作成
 
-課題が完成したら、リポジトリのアドレスを教えてください。
 
-## 参考記事
+## AIサービスの利用
+言語に対応するカラーアイコンの作成する際、400 以上の言語があったため[マップファイル](https://github.com/KazumaProject/android-engineer-codecheck/blob/main/app/src/main/kotlin/jp/co/yumemi/android/code_check/util/LanguageColors.kt)を AI を使用して作成しました。[参考](https://github.com/KazumaProject/android-engineer-codecheck/pull/40)
 
-提出された課題の評価ポイントに関しては、[こちらの記事](https://qiita.com/blendthink/items/aa70b8b3106fb4e3555f)に詳しく書かれてありますので、ぜひご覧ください。
-
-## AIサービスの利用について
-
-ChatGPTなどAIサービスの利用は禁止しておりません。
-
-利用にあたって工夫したプロンプトやソースコメント等をご提出頂くことで、加点評価する場合もございます。 (減点評価はありません)
-
-また、弊社コードチェック担当者もAIサービスを利用させていただく場合があります。
-
-AIサービスの利用は差し控えてもらいたいなどのご要望がある場合は、お気軽にお申し出ください。
+アプリのアイコンも AI で作成しました。
