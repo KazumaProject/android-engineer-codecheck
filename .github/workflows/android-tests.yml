@@ -39,7 +39,7 @@ jobs:
       - name: Start Emulator and Run Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 33
+          api-level: 32
           target: google_apis
           arch: x86_64
           profile: pixel_4
