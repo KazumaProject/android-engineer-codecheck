@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class jp.co.yumemi.android.code_check.data.remote.GitHubSearchResult
+-keep class jp.co.yumemi.android.code_check.data.remote.ReadmeResponse
+-keep class jp.co.yumemi.android.code_check.data.remote.RepoSearchResponse
